@@ -15,6 +15,8 @@ class MediaViewer extends StatefulWidget {
 }
 
 class _MediaViewerState extends State<MediaViewer> {
+  static const _pink = Color(0xFFFFB3D9);
+
   VideoPlayerController? _videoController;
   bool _videoInitialized = false;
   bool _showPlayOverlay = false;
@@ -169,7 +171,7 @@ class _MediaViewerState extends State<MediaViewer> {
               allowScrubbing: true,
               padding: const EdgeInsets.symmetric(vertical: 8),
               colors: const VideoProgressColors(
-                playedColor: Colors.blue,
+                playedColor: _pink,
                 bufferedColor: Colors.grey,
                 backgroundColor: Colors.black,
               ),
@@ -227,11 +229,22 @@ class _MediaViewerState extends State<MediaViewer> {
                   await controller.seekTo(Duration.zero);
                   await controller.play();
                 },
-                backgroundColor: Colors.white24,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                highlightElevation: 0,
+                foregroundColor: _pink,
+                shape: const CircleBorder(),
                 child: const Icon(Icons.replay),
               ),
               const SizedBox(width: 8),
-              const Chip(label: Text('实况'), backgroundColor: Colors.black54),
+              const Text(
+                '实况',
+                style: TextStyle(
+                  color: _pink,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                ),
+              ),
             ],
           ),
         ),

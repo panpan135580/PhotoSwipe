@@ -20,6 +20,8 @@ class BrowserScreen extends StatefulWidget {
 }
 
 class _BrowserScreenState extends State<BrowserScreen> {
+  static const _pink = Color(0xFFFFB3D9);
+
   late final PageController _pageController;
   List<MediaItem> _filteredAssets = [];
   int _currentIndex = 0;
@@ -250,10 +252,15 @@ class _BrowserScreenState extends State<BrowserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(
           _formatDate(_currentItem?.createDateTime),
-          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w400),
+          style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+            color: _pink,
+          ),
         ),
         centerTitle: true,
         backgroundColor: Colors.black,
@@ -261,6 +268,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
         toolbarHeight: 42,
         leadingWidth: 40,
         iconTheme: const IconThemeData(size: 20),
+        foregroundColor: Colors.white,
         actions: [
           if (_filteredAssets.any((item) => item.isMarkedForDelete))
             TextButton.icon(
@@ -269,9 +277,10 @@ class _BrowserScreenState extends State<BrowserScreen> {
               label: Text(
                 '执行删除 (${_filteredAssets.where((item) => item.isMarkedForDelete).length})',
               ),
+              style: TextButton.styleFrom(foregroundColor: _pink),
             ),
           IconButton(
-            icon: const Icon(Icons.calendar_today, size: 20),
+            icon: const Icon(Icons.calendar_today, size: 20, color: _pink),
             onPressed: _openDateFilter,
           ),
         ],
@@ -314,7 +323,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
                     ),
                     child: Text(
                       '${_currentIndex + 1} / ${_filteredAssets.length}',
-                      style: const TextStyle(color: Colors.white, fontSize: 14),
+                      style: const TextStyle(color: _pink, fontSize: 14),
                     ),
                   ),
                 ),
@@ -328,7 +337,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
                         onPressed: _toggleFavoriteForCurrentAsset,
                         iconSize: 34,
                         splashRadius: 24,
-                        color: Colors.white,
+                        color: _pink,
                         icon: Icon(
                           _filteredAssets[_currentIndex].isFavorite
                               ? Icons.favorite
@@ -340,7 +349,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
                         onPressed: _toggleDeleteMarkForCurrentAsset,
                         iconSize: 34,
                         splashRadius: 24,
-                        color: Colors.white,
+                        color: _pink,
                         icon: Icon(
                           _filteredAssets[_currentIndex].isMarkedForDelete
                               ? Icons.history
